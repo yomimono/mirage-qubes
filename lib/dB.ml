@@ -73,6 +73,7 @@ let connect ~domid () =
   QV.client ~domid ~port:qubesdb_vchan_port () >>= fun vchan ->
   Log.info "connected" Logs.unit;
   let t = {vchan; store = Hashtbl.create 20} in
+  Log.warn "sending MALFORMED messages (no padding) for testing!!" Logs.unit;
   full_db_sync t >>= fun () ->
   Lwt.async (fun () -> listen t);
   Lwt.return t

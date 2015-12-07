@@ -116,7 +116,7 @@ module QubesDB = struct
   cstruct msg_header {
     uint8_t ty;
     uint8_t path[64];
-    uint8_t padding[3];
+(*     uint8_t padding[3]; *)
     uint32_t data_len;
     (* rest of message is data *)
   } as little_endian
@@ -125,7 +125,7 @@ module QubesDB = struct
     let msg = Cstruct.create sizeof_msg_header in
     set_msg_header_ty msg (qdb_msg_to_int ty);
     set_fixed_string (get_msg_header_path msg) path;
-    Cstruct.memset (get_msg_header_padding msg) 0;
+(*     Cstruct.memset (get_msg_header_padding msg) 0; *)
     set_msg_header_data_len msg (Int32.of_int data_len);
     msg
 
